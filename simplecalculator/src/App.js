@@ -1,48 +1,64 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable no-eval */
 import "./App.css";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
+import BackspaceIcon from "@mui/icons-material/Backspace";
 
 const useStyle = makeStyles({
   app: {
     border: "2px solid gray",
-    width: "25%",
+    width: "60%",
     marginTop: "10%",
     margin: "auto",
-    height: "390px",
-    backgroundColor: "black",
+    height: "50vh",
 
   },
   display: {
     border: "2px solid gray",
     margin: "10px",
-    height: "85px",
-    color: "whitesmoke",
-
+    height: "50px",
+    display: "block",
   },
   row2: {
     display: "flex",
-    width: "100px",
+    width: "882px",
     marginTop: "20px",
-    gap: "30px",
+    gap: "200px",
     marginLeft: "10px",
 
   },
   row1: {
     display: "flex",
-    gap: "30px",
-    width: "100px",
+    gap: "200px",
+    width: "882px",
     marginLeft: "10px",
-    marginTop: "20px",
+    marginTop: "35px",
   },
   row3: {
     display: "flex",
     float: "right",
-    gap: "30px",
+    gap: "200px",
     marginTop: "20px",
-    marginRight: "15px",
+    marginRight: "30px",
+  },
+  logicButton: {
+    borderRadius: "28px !important",
+    backgroundColor: "#cc5647 !important",
+    color: "whitesmoke !important",
+    "&:hover": {
+      borderRadius: "28px !important",
+      backgroundColor: "whitesmoke !important",
+      color: "#cc5647 !important",
+
+    },
+  },
+  numericalButton: {
+    borderRadius: "28px !important",
+    "&:hover": {
+      borderRadius: "28px !important",
+      backgroundColor: "#a29290 !important",
+    },
   },
 
 });
@@ -54,51 +70,65 @@ function App() {
     setAnswer(0);
   };
   const numberHandler = (e) => {
-    setInput(input.concat(e.target.value));
+    const c = input.concat(e.target.value);
+    setInput(c);
   };
   const backSpaceHandler = () => {
-    setInput(input.slice(0, -1));
+    const reaming = input.slice(0, input.length - 1);
+    setInput(reaming);
+  };
+  const calculateHandle = () => {
+    try {
+      const total = eval(input);
+      setAnswer(total);
+    } catch {
+      setAnswer("some error");
+    }
   };
   const classes = useStyle();
   return (
     <div className={classes.app}>
       <div className={classes.display}>
-        <h2 style={{
-          margin: "0px", marginBottom: "10px", width: "100%", paddingLeft: "10px",
+        <h4 style={{ paddingLeft: "10px", marginTop: "10px", marginBottom: "0px" }}>
+          {input}
+        </h4>
+        <h4 style={{
+          float: "right", paddingRight: "10px", marginTop: "0px", marginBottom: "0px",
         }}
         >
-          {input}
-        </h2>
-        <h2 style={{ float: "right", paddingRight: "10px" }}>{answer}</h2>
+          {answer}
+        </h4>
       </div>
       <div className={classes.row1}>
-        <Button onClick={clearHandler} variant="outlined" sx={{ borderRadius: 28, backgroundColor: "#cc5647", color: "whitesmoke" }}>Clear</Button>
-        <Button onClick={backSpaceHandler} variant="outlined" sx={{ borderRadius: 28, backgroundColor: "#cc5647", color: "whitesmoke" }}>Back</Button>
-        <Button variant="outlined" value="%" onClick={numberHandler} sx={{ borderRadius: 28, backgroundColor: "#cc5647", color: "whitesmoke" }}>%</Button>
-        <Button variant="outlined" value="/" onClick={numberHandler} sx={{ borderRadius: 28, backgroundColor: "#cc5647", color: "whitesmoke" }}>/</Button>
+        <Button className={classes.logicButton} onClick={clearHandler}>Clear</Button>
+        <Button onClick={backSpaceHandler} className={classes.logicButton}>
+          <BackspaceIcon />
+        </Button>
+        <Button value="%" onClick={numberHandler} className={classes.logicButton}>%</Button>
+        <Button value="/" onClick={numberHandler} className={classes.logicButton}>/</Button>
       </div>
       <div className={classes.row2}>
-        <Button value="7" onClick={numberHandler}>7</Button>
-        <Button value="8" onClick={numberHandler}>8</Button>
-        <Button value="9" onClick={numberHandler}>9</Button>
-        <Button variant="outlined" value="*" onClick={numberHandler} sx={{ borderRadius: 28, backgroundColor: "#cc5647", color: "whitesmoke" }}>*</Button>
+        <Button value="7" className={classes.numericalButton} onClick={numberHandler}>7</Button>
+        <Button value="8" className={classes.numericalButton} onClick={numberHandler}>8</Button>
+        <Button value="9" className={classes.numericalButton} onClick={numberHandler}>9</Button>
+        <Button value="*" onClick={numberHandler} className={classes.logicButton}>*</Button>
       </div>
       <div className={classes.row2}>
-        <Button value="4" onClick={numberHandler}>4</Button>
-        <Button value="5" onClick={numberHandler}>5</Button>
-        <Button value="6" onClick={numberHandler}>6</Button>
-        <Button variant="outlined" value="-" onClick={numberHandler} sx={{ borderRadius: 28, backgroundColor: "#cc5647", color: "whitesmoke" }}>-</Button>
+        <Button value="4" className={classes.numericalButton} onClick={numberHandler}>4</Button>
+        <Button value="5" className={classes.numericalButton} onClick={numberHandler}>5</Button>
+        <Button value="6" className={classes.numericalButton} onClick={numberHandler}>6</Button>
+        <Button value="-" onClick={numberHandler} className={classes.logicButton}>-</Button>
       </div>
       <div className={classes.row2}>
-        <Button value="1" onClick={numberHandler}>1</Button>
-        <Button value="2" onClick={numberHandler}>2</Button>
-        <Button value="3" onClick={numberHandler}>3</Button>
-        <Button variant="outlined" sx={{ borderRadius: 28, backgroundColor: "#cc5647", color: "whitesmoke" }} value="+" onClick={numberHandler}>+</Button>
+        <Button value="1" className={classes.numericalButton} onClick={numberHandler}>1</Button>
+        <Button value="2" className={classes.numericalButton} onClick={numberHandler}>2</Button>
+        <Button value="3" className={classes.numericalButton} onClick={numberHandler}>3</Button>
+        <Button className={classes.logicButton} value="+" onClick={numberHandler}>+</Button>
       </div>
       <div className={classes.row3}>
-        <Button value="0" onClick={numberHandler}>0</Button>
-        <Button value="." onClick={numberHandler}>.</Button>
-        <Button variant="outlined" sx={{ borderRadius: 28, backgroundColor: "#cc5647", color: "whitesmoke" }}>=</Button>
+        <Button className={classes.numericalButton} value="0" onClick={numberHandler}>0</Button>
+        <Button className={classes.numericalButton} value="." onClick={numberHandler}>.</Button>
+        <Button className={classes.logicButton} onClick={calculateHandle}>=</Button>
       </div>
     </div>
   );
