@@ -1,10 +1,9 @@
-/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable no-eval */
 import './App.css';
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import Button from '@mui/material/Button';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import Buttons from './Button';
 
 const useStyle = makeStyles({
   app: {
@@ -12,7 +11,7 @@ const useStyle = makeStyles({
     width: '60%',
     marginTop: '10%',
     margin: 'auto',
-    height: '50vh',
+    height: '55vh',
 
   },
   display: {
@@ -23,31 +22,36 @@ const useStyle = makeStyles({
   },
   row2: {
     display: 'flex',
-    width: '882px',
     marginTop: '20px',
-    gap: '200px',
+    justifyContent: 'space-between',
     marginLeft: '10px',
+    marginRight: '20px',
 
   },
   row1: {
     display: 'flex',
-    gap: '200px',
-    width: '882px',
+    justifyContent: 'space-between',
     marginLeft: '10px',
     marginTop: '35px',
+    marginRight: '20px',
   },
   row3: {
     display: 'flex',
     float: 'right',
-    gap: '200px',
+    gap: '225px',
     marginTop: '20px',
-    marginRight: '30px',
+    marginRight: '20px',
   },
   logicButton: {
+    width: '50px',
+    height: '45px',
+    padding: '10px',
+    border: '0px',
     borderRadius: '28px !important',
     backgroundColor: '#cc5647 !important',
     color: 'whitesmoke !important',
     '&:hover': {
+      cursor: 'pointer',
       borderRadius: '28px !important',
       backgroundColor: 'whitesmoke !important',
       color: '#cc5647 !important',
@@ -55,8 +59,12 @@ const useStyle = makeStyles({
     },
   },
   numericalButton: {
+    width: '50px',
+    padding: '10px',
+    border: '0px',
     borderRadius: '28px !important',
     '&:hover': {
+      cursor: 'pointer',
       borderRadius: '28px !important',
       backgroundColor: '#a29290 !important',
     },
@@ -90,7 +98,7 @@ function App() {
       const total = eval(input);
       setAnswer(total);
     } catch {
-      setAnswer('some error');
+      setAnswer('Error');
     }
   };
   return (
@@ -104,35 +112,35 @@ function App() {
         </h4>
       </div>
       <div className={classes.row1}>
-        <Button className={classes.logicButton} onClick={clearHandler}>Clear</Button>
-        <Button onClick={backSpaceHandler} className={classes.logicButton}>
+        <Buttons className={classes.logicButton} onClick={clearHandler}>Clear</Buttons>
+        <Buttons onClick={backSpaceHandler} className={classes.logicButton}>
           <BackspaceIcon />
-        </Button>
-        <Button value="%" onClick={numberHandler} className={classes.logicButton}>%</Button>
-        <Button value="/" onClick={numberHandler} className={classes.logicButton}>/</Button>
+        </Buttons>
+        <Buttons value="%" onClick={numberHandler} className={classes.logicButton}>%</Buttons>
+        <Buttons value="/" onClick={numberHandler} className={classes.logicButton}>/</Buttons>
       </div>
       <div className={classes.row2}>
-        <Button value="7" className={classes.numericalButton} onClick={numberHandler}>7</Button>
-        <Button value="8" className={classes.numericalButton} onClick={numberHandler}>8</Button>
-        <Button value="9" className={classes.numericalButton} onClick={numberHandler}>9</Button>
-        <Button value="*" onClick={numberHandler} className={classes.logicButton}>*</Button>
+        <Buttons value="7" className={classes.numericalButton} onClick={numberHandler}>7</Buttons>
+        <Buttons value="8" className={classes.numericalButton} onClick={numberHandler}>8</Buttons>
+        <Buttons value="9" className={classes.numericalButton} onClick={numberHandler}>9</Buttons>
+        <Buttons value="*" onClick={numberHandler} className={classes.logicButton}>*</Buttons>
       </div>
       <div className={classes.row2}>
-        <Button value="4" className={classes.numericalButton} onClick={numberHandler}>4</Button>
-        <Button value="5" className={classes.numericalButton} onClick={numberHandler}>5</Button>
-        <Button value="6" className={classes.numericalButton} onClick={numberHandler}>6</Button>
-        <Button value="-" onClick={numberHandler} className={classes.logicButton}>-</Button>
+        <Buttons value="4" className={classes.numericalButton} onClick={numberHandler}>4</Buttons>
+        <Buttons value="5" className={classes.numericalButton} onClick={numberHandler}>5</Buttons>
+        <Buttons value="6" className={classes.numericalButton} onClick={numberHandler}>6</Buttons>
+        <Buttons value="-" onClick={numberHandler} className={classes.logicButton}>-</Buttons>
       </div>
       <div className={classes.row2}>
-        <Button value="1" className={classes.numericalButton} onClick={numberHandler}>1</Button>
-        <Button value="2" className={classes.numericalButton} onClick={numberHandler}>2</Button>
-        <Button value="3" className={classes.numericalButton} onClick={numberHandler}>3</Button>
-        <Button className={classes.logicButton} value="+" onClick={numberHandler}>+</Button>
+        <Buttons value="1" className={classes.numericalButton} onClick={numberHandler}>1</Buttons>
+        <Buttons value="2" className={classes.numericalButton} onClick={numberHandler}>2</Buttons>
+        <Buttons value="3" className={classes.numericalButton} onClick={numberHandler}>3</Buttons>
+        <Buttons className={classes.logicButton} value="+" onClick={numberHandler}>+</Buttons>
       </div>
       <div className={classes.row3}>
-        <Button className={classes.numericalButton} value="0" onClick={numberHandler}>0 0</Button>
-        <Button className={classes.numericalButton} value="." onClick={numberHandler}>.</Button>
-        <Button className={classes.logicButton} onClick={calculateHandle}>=</Button>
+        <Buttons className={classes.numericalButton} value="0" onClick={numberHandler}>0 0</Buttons>
+        <Buttons className={classes.numericalButton} value="." onClick={numberHandler}>.</Buttons>
+        <Buttons className={classes.logicButton} onClick={calculateHandle}>=</Buttons>
       </div>
     </div>
   );
