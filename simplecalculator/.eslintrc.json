@@ -18,5 +18,10 @@
     },
     "plugins": [
         "react", "import", "jsx-a11y"
-    ]
+    ],
+    "rules": {
+        "react/destructuring-assignment": "off",
+        "react/prop-types": "off",
+        "no-eval": "off"
+    }
 }

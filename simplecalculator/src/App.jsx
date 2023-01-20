@@ -1,4 +1,3 @@
-/* eslint-disable no-eval */
 import './App.css';
 import React from 'react';
 import { makeStyles } from '@mui/styles';
@@ -26,6 +25,7 @@ const useStyle = makeStyles({
     justifyContent: 'space-between',
     marginLeft: '10px',
     marginRight: '20px',
+    width: '122%',
 
   },
   row1: {
@@ -38,9 +38,9 @@ const useStyle = makeStyles({
   row3: {
     display: 'flex',
     float: 'right',
-    gap: '225px',
+    gap: '220px',
     marginTop: '20px',
-    marginRight: '20px',
+    marginRight: '15px',
   },
   logicButton: {
     width: '50px',
@@ -77,6 +77,21 @@ const useStyle = makeStyles({
   },
 
 });
+const values = [
+  {
+    options: [7, 8, 9],
+    operate: '*',
+  },
+  {
+    options: [4, 5, 6],
+    operate: '-',
+  },
+  {
+    options: [1, 2, 3],
+    operate: '+',
+  },
+];
+const zero = [{ option: '0' }, { option: '.' }];
 function App() {
   const classes = useStyle();
   const [input, setInput] = React.useState('');
@@ -119,27 +134,40 @@ function App() {
         <Buttons value="%" onClick={numberHandler} className={classes.logicButton}>%</Buttons>
         <Buttons value="/" onClick={numberHandler} className={classes.logicButton}>/</Buttons>
       </div>
-      <div className={classes.row2}>
-        <Buttons value="7" className={classes.numericalButton} onClick={numberHandler}>7</Buttons>
-        <Buttons value="8" className={classes.numericalButton} onClick={numberHandler}>8</Buttons>
-        <Buttons value="9" className={classes.numericalButton} onClick={numberHandler}>9</Buttons>
-        <Buttons value="*" onClick={numberHandler} className={classes.logicButton}>*</Buttons>
-      </div>
-      <div className={classes.row2}>
-        <Buttons value="4" className={classes.numericalButton} onClick={numberHandler}>4</Buttons>
-        <Buttons value="5" className={classes.numericalButton} onClick={numberHandler}>5</Buttons>
-        <Buttons value="6" className={classes.numericalButton} onClick={numberHandler}>6</Buttons>
-        <Buttons value="-" onClick={numberHandler} className={classes.logicButton}>-</Buttons>
-      </div>
-      <div className={classes.row2}>
-        <Buttons value="1" className={classes.numericalButton} onClick={numberHandler}>1</Buttons>
-        <Buttons value="2" className={classes.numericalButton} onClick={numberHandler}>2</Buttons>
-        <Buttons value="3" className={classes.numericalButton} onClick={numberHandler}>3</Buttons>
-        <Buttons className={classes.logicButton} value="+" onClick={numberHandler}>+</Buttons>
-      </div>
+      {values.map((x) => (
+        <div className={classes.row2}>
+          {x.options.map((t) => (
+            <Buttons
+              key={t}
+              value={t}
+              className={classes.numericalButton}
+              onClick={numberHandler}
+            >
+              {t}
+            </Buttons>
+          ))}
+          <Buttons
+            key={x.operate}
+            value={x.operate}
+            onClick={numberHandler}
+            className={classes.logicButton}
+          >
+            {x.operate}
+          </Buttons>
+          <br />
+        </div>
+      ))}
       <div className={classes.row3}>
-        <Buttons className={classes.numericalButton} value="0" onClick={numberHandler}>0 0</Buttons>
-        <Buttons className={classes.numericalButton} value="." onClick={numberHandler}>.</Buttons>
+        {zero.map((x) => (
+          <Buttons
+            key={x.option}
+            value={x.option}
+            className={classes.numericalButton}
+            onClick={numberHandler}
+          >
+            {x.option}
+          </Buttons>
+        ))}
         <Buttons className={classes.logicButton} onClick={calculateHandle}>=</Buttons>
       </div>
     </div>
